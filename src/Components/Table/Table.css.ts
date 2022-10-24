@@ -34,7 +34,7 @@ export const Styles = styled.div`
         border-right: 0;
       }
     }
-    button {
+     .eliminate{
       background: transparent;
       border-radius: 40px;
       border: 2px solid black;
@@ -44,11 +44,27 @@ export const Styles = styled.div`
       cursor: pointer;
 
     }
-    button:hover {
+    .eliminate:hover {
       background: red;
       color: white;
       border: 2px solid red;
 
   }
+  .edit{
+    background: transparent;
+    border-radius: 40px;
+    border: 2px solid black;
+    color: black;
+    margin: 0 1em;
+    padding: 0.25em 1em;
+    cursor: pointer;
+
+  }
+  .edit:hover {
+    background: blue;
+    color: white;
+    border: 2px solid blue;
+
+}
 `
 

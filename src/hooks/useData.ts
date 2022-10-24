@@ -1,6 +1,5 @@
-import {useState, useCallback, useEffect} from 'react';
+import { useCallback, useEffect} from 'react';
 import { getAllProducts } from '../apis';
-import { IItem } from '../interfaces';
 import useStore from '../store';
 
 export const useData = () => {

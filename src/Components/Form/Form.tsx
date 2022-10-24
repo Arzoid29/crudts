@@ -1,55 +1,46 @@
 import React from "react";
 import { Style } from "./Form.css";
-import { IItem } from "../../interfaces";
 import swal from "sweetalert";
 import useStore from "../../store";
 
 
 export const Form = () => {
-  const [values, setValues] = React.useState({
-    title: "",
-    description: "",
-    price: "",
-  });
+
   const store = useStore()
+
+
   const handleSubmit = (event: any) => {
     event.preventDefault();
     if (
-      values.title === "" ||
-      values.description === "" ||
-      values.price === ""
+      store.product.title === "" ||
+      store.product.description === "" ||
+      store.product.price === ""
       
     ) {
       swal("Error", "Please fill all the fields", "error");
-    }else if (values.price === "0"){
+    }else if (store.product.price === "0"){
       swal("Error", "Price cannot be 0", "error");
     }
      else {
       event.preventDefault();
       store.addToProducts({
-        title: values.title,
-        description: values.description,
-        price: Number(values.price),
+        title: store.product.title,
+        description: store.product.description,
+        price: Number(store.product.price),
       });
-      setValues({
-        title: "",
-        description: "",
-        price: "",
-      });
+      store.clearForm()
       swal("Success", "Product added successfully", "success");
     }
   };
 
-  function handleChange(evt: { target: any }) {
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = evt;
     const { name, value } = target;
 
-    const newValues = {
-      ...values,
-      [name]: value,
-    };
+    const newValue = {...store.product,
+      [name]: value,}
 
-    setValues(newValues);
+    store.handleFormChange(newValue)
   }
   return (
     <Style
@@ -62,7 +53,7 @@ export const Form = () => {
         id="title"
         name="title"
         type="text"
-        value={values.title}
+        value={store.product.title}
         onChange={handleChange}
       />
       <label htmlFor="description">Description</label>
@@ -70,7 +61,7 @@ export const Form = () => {
         id="description"
         name="description"
         type="text"
-        value={values.description}
+        value={store.product.description}
         onChange={handleChange}
       />
       <label htmlFor="price">Price</label>
@@ -78,10 +69,10 @@ export const Form = () => {
         id="price"
         name="price"
         type="number"
-        value={values.price}
+        value={store.product.price}
         onChange={handleChange}
       />
-      <button type="submit">Save</button>
+      <button type="submit">{store.editMode ? 'Update' : 'Save'}</button>
     </Style>
   );
 };

@@ -1,4 +1,3 @@
-
 import { Styles } from './Table.css'
 import { IItem } from '../../interfaces'
 import {Product} from '../Product/Product'
@@ -19,7 +18,7 @@ export function Table()   {
         </thead>
         <tbody>
           {store.products.map((item: IItem, key: number) => {
-            return <Product item={item} key={key} /> 
+            return <Product item={item} key={key} />
           })}
         </tbody>
        
